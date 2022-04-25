@@ -3,25 +3,28 @@ const btnBlack = document.createElement('button');
 const btnGrey = document.createElement('button');
 const btnRGB = document.createElement('button');
 const btnSize = document.createElement('button');
+const btnWhite = document.createElement('button')
 const buttonsContainer = document.querySelector('.buttons');
 
 
 function resize() {
     btnSize.textContent = 'GRID SIZE'
     btnSize.addEventListener('click', () => {
-        let userInput = prompt('Specify the new size of the grid')
-        if (userInput === null || userInput < 1) {
+        let userInput = prompt('Specify the new size of the grid\n(Values lower than 100 only!)')
+        if (userInput === null || userInput < 1 || userInput > 100) {
             reset()
-            createDivs(16,16)  
-            blackColor()
+            createDivs(16)  
             greyColor()
+            blackColor()
             rgbColor()
+            whiteColor()
         } else {
             reset()
             createDivs(userInput)
-            blackColor()
             greyColor()
+            blackColor()
             rgbColor()
+            whiteColor()
         }
     })
     buttonsContainer.appendChild(btnSize).classList.add('btn')
@@ -44,7 +47,7 @@ function createDivs(size) {
     
 }
 
-createDivs(16,16);
+createDivs(16);
 
 function greyColor() {
     const boxes = container.querySelectorAll('.box')
@@ -96,6 +99,18 @@ function rgbColor() {
 }
 
 rgbColor()
+
+function whiteColor() {
+    const boxes = container.querySelectorAll('.box')
+    btnWhite.textContent = 'ERASER';
+    btnWhite.addEventListener('click', () => {
+        boxes.forEach(box => box.addEventListener('mouseover', () =>{
+            box.style.backgroundColor = 'white';
+        }))
+    })
+    buttonsContainer.appendChild(btnWhite).classList.add('btn')
+}
+whiteColor()
 
 
 function reset() {
